@@ -57,4 +57,15 @@ struct flip : base_transformer<Fn> {
     }
 };
 
+// Will allow arguments to all of the Fns in the future.
+template <typename Fn, typename... Fns>
+struct variadic : detail::base_transformer<Fn> {
+    using detail::base_transformer<Fn>::base_transformer;
+
+    template <typename... Args, typename = typename std::enable_if<sizeof...(Fns) == sizeof...(Args)>::type>
+    constexpr auto operator()(Args&&... args) const -> result_of_t<const Fn(result_of_t<const Fns(Args&&)>...)> {
+        return this->fn_(::std::forward<result_of_t<Fns(Args&&)>>(Fns{}(::std::forward<Args>(args)))...);
+    }
+};
+
 }
