@@ -27,5 +27,4 @@ using safe_forwarding_constructor_t = typename ::std::enable_if<
     safe_forwarding_constructor<Class, Args...>::value
 >::type;
 
-
 }
