@@ -11,7 +11,7 @@ namespace optimus {
     constexpr Class() { } \
     constexpr Class(Class const&) = default; \
     constexpr Class(Class &&) = default;
-
+/*
 struct id {
     OPTIMUS_MAKE_FUNCTION_CONSTRUCTORS(id)
 
@@ -20,7 +20,7 @@ struct id {
         return optimus::forward<T>(v);
     }
 };
-
+*/
 template <typename T>
 struct constant {
     constexpr constant() = delete;

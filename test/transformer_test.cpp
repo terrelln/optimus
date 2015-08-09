@@ -23,7 +23,7 @@ typedef ::testing::Types<
     optimus::fst,
     optimus::snd,
     optimus::get<2>,
-    optimus::identity,
+    optimus::id,
     optimus::flip,
     optimus::variadic<optimus::id, optimus::constant<std::integral_constant<int, 42>>>,
     optimus::after<optimus::logical_not>,
@@ -119,8 +119,8 @@ TEST(get, constexpr) {
 }
 */
 
-TEST(identity, constexpr_operator) {
-    constexpr auto less = optimus::identity::apply<optimus::less<int>>{};
+TEST(id, constexpr_operator) {
+    constexpr auto less = optimus::id::apply<optimus::less<int>>{};
     EXPECT_EQ(true, (std::integral_constant<bool, less(5, 6)>::value));
     EXPECT_EQ(false, (std::integral_constant<bool, less(5, 5)>::value));
 }
@@ -220,8 +220,8 @@ TEST(compose, works) {
         >;
     EXPECT_SAME_TYPE(t1::apply<optimus::id>, t2);
 
-    using t3 = optimus::compose<optimus::identity>::apply<optimus::id>;
-    using t4 = optimus::identity::apply<optimus::id>;
+    using t3 = optimus::compose<optimus::id>::apply<optimus::id>;
+    using t4 = optimus::id::apply<optimus::id>;
     EXPECT_SAME_TYPE(t3, t4);
 
     EXPECT_EQ(false, (std::integral_constant<bool, t1::apply<optimus::less<bool>>{}(false, true)>::value));

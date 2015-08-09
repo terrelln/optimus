@@ -5,7 +5,7 @@
 
 namespace optimus {
 
-// Until C++14 forward is not constexpr, delete once C++11 is supported
+// Until C++14 forward is not constexpr, delete once C++14 is supported
 template <typename T>
 constexpr T&& forward(typename std::remove_reference<T>::type& t) noexcept {
     return static_cast<T&&>(t);
@@ -16,6 +16,12 @@ constexpr T&& forward(typename std::remove_reference<T>::type&& t) noexcept {
     static_assert(!std::is_lvalue_reference<T>::value,
         "Cannot forward a rvalue as a lvalue.");
     return static_cast<T&&>(t);
+}
+
+// Until C++14 move is not constexpr, delete once C++14 is supported
+template <typename T>
+constexpr typename std::remove_reference<T>::type&& move(T&& t) noexcept {
+    return static_cast<typename std::remove_reference<T>::type&&>(t);
 }
 
 // Remove once C++14 is supported

@@ -6,6 +6,7 @@
 #include <gtest/gtest.h>
 
 #include <optimus/functional.h>
+#include <optimus/transformers.h>
 
 #define EXPECT_SAME_TYPE(T, U) \
     EXPECT_TRUE((std::is_same<T, U>::value))
