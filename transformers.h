@@ -24,6 +24,15 @@
 
 namespace optimus {
 
+/**
+ * This class serves two purposes:
+ *   1. Provide a function obejct which returns the element at position
+ *      `Index` of a tuple.
+ *   2. Provide a function object transformer `get<Index>::apply` which
+ *      takes a function object and returns a function object which first
+ *      calls `std::get<Index>` on each argument and then forwards it to
+ *      the provided function object.
+ */
 template <::std::size_t Index>
 class get {
     template <typename Fn>
